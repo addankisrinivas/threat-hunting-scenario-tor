@@ -15,7 +15,7 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ### High-Level TOR-Related IoC Discovery Plan
 
-- **Check `DeviceFileEvents`** for any `tor(.exe)` or `firefox(.exe)` or 'tor-browser(.exe)' or 'torbrowser(.exe)' file events.
+- **Check `DeviceFileEvents`** for any `tor(.exe)` or `firefox(.exe)` or `tor-browser(.exe)` or `torbrowser(.exe)` file events.
 - **Check `DeviceProcessEvents`** for any signs of installation or usage.
 - **Check `DeviceNetworkEvents`** for any signs of outgoing connections over known TOR ports.
 
