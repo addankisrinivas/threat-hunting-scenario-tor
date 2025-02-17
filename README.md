@@ -1,4 +1,5 @@
-<img width="312" alt="image" src="https://github.com/user-attachments/assets/2867df28-734f-4584-a2fc-656de9c9fee9" />
+<img width="405" alt="image" src="https://github.com/user-attachments/assets/5f02beb8-4a78-463c-80c6-1ab8af33fe2d" />
+
 
 
 # Threat Hunt Report: Unauthorized TOR Usage
