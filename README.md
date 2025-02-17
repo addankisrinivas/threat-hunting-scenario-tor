@@ -180,12 +180,12 @@ DeviceNetworkEvents
 
 ## Summary
 
-The user "firstuser" downloaded and silently installed the Tor Browser on their device "dimi-win10-au" without any user prompts. Shortly after installation, they launched the browser, which started the Tor process and established multiple encrypted connections, including a local proxy (127.0.0.1:9150) and external IPs, confirming active browsing through the Tor network. Additionally, the user created a file named "tor-shopping-list.txt" on their desktop, along with a shortcut in the Recent Files folder, suggesting they may have taken notes related to their browsing activity. The timeline of events indicates deliberate and active use of the Tor Browser for anonymous internet access, with possible documentation in the form of the “shopping list” file.
+The user "firstuser" downloaded and silently installed the Tor Browser on their device "dimi-win10-au" without any user prompts. Shortly after installation, they launched the browser, which started the Tor process and established multiple encrypted connections, including a local proxy (127.0.0.1:9150) and external IPs, confirming active browsing through the Tor network. Additionally, the user created a file named `tor-shopping-list.txt` on their desktop, along with a shortcut in the Recent Files folder, suggesting they may have taken notes related to their browsing activity. The timeline of events indicates deliberate and active use of the Tor Browser for anonymous internet access, with possible documentation in the form of the “shopping list” file.
 
 ---
 
 ## Response Taken
 
-TOR usage was confirmed on endpoint dimi-win10-au by the user firstuser. The device was isolated and the user's direct manager was notified.
+TOR usage was confirmed on endpoint `dimi-win10-au` by the user `firstuser`. The device was isolated and the user's direct manager was notified.
 
 ---
