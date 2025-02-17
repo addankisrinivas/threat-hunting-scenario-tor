@@ -32,68 +32,73 @@ Searched the DeviceFileEvents table for ANY file that had the string “tor” i
 **Query used to locate events:**
 
 ```kql
-DeviceFileEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName == "employee"  
-| where FileName contains "tor"  
-| where Timestamp >= datetime(2024-11-08T22:14:48.6065231Z)  
-| order by Timestamp desc  
+DeviceFileEvents
+| where DeviceName == "dimi-win10-au"
+| where InitiatingProcessAccountName == "firstuser"
+| where FileName contains "tor"
+| where Timestamp >= datetime(2025-02-16T23:23:54.7864951Z)
+| order by Timestamp desc 
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
+<img width="747" alt="image" src="https://github.com/user-attachments/assets/f9c12afa-9b3a-4e11-9b1d-1579630f634b" />
+
+
 
 ---
 
 ### 2. Searched the `DeviceProcessEvents` Table
 
-Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "threat-hunt-lab" device ran the file `tor-browser-windows-x86_64-portable-14.0.1.exe` from their Downloads folder, using a command that triggered a silent installation.
+Searched the DeviceProcessEvents table for any `ProcessCommandLine` that contained the string “tor-browser-windows-x86_64-portable-14.0.6.exe”. Based on the logs returned, on `2025-02-16T23:27:07.0628924Z`, the Tor Browser portable installer (version 14.0.6, 64-bit) was silently executed (/S flag) on the device "dimi-win10-au" by the user "firstuser" from the Downloads folder, without any user interaction.
 
 **Query used to locate event:**
 
 ```kql
 
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
+DeviceProcessEvents
+| where DeviceName == "dimi-win10-au"
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.6.exe"
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, AccountName, ProcessCommandLine
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
+<img width="746" alt="image" src="https://github.com/user-attachments/assets/c1a03d55-aeb2-453a-a65f-002ff040f9ce" />
+
 
 ---
 
 ### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
 
-Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at `2024-11-08T22:17:21.6357935Z`. There were several other instances of `firefox.exe` (TOR) as well as `tor.exe` spawned afterwards.
+Searched the DeviceProcessEvents table for any indication that user “firstuser” actually opened the Tor browser. There was evidence that they did open it at `2025-02-16T23:27:40.3533338Z`. There were several other instances of `firefox.exe` (Tor) as well as `tor.exe` spawned afterwards.
 
 **Query used to locate events:**
 
 ```kql
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
-| order by Timestamp desc
+DeviceProcessEvents
+| where DeviceName == "dimi-win10-au"
+| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe", "torbrowser.exe")  
+| order by Timestamp desc 
+| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
+<img width="731" alt="image" src="https://github.com/user-attachments/assets/89690c3b-dd0e-4718-b09c-5e4d83f0af24" />
+
 
 ---
 
 ### 4. Searched the `DeviceNetworkEvents` Table for TOR Network Connections
 
-Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At `2024-11-08T22:18:01.1246358Z`, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address `176.198.159.33` on port `9001`. The connection was initiated by the process `tor.exe`, located in the folder `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`. There were a couple of other connections to sites over port `443`.
+Search the DeviceNetworkEvents table for any indication the tor browser was used to establish a connection using any of the known tor ports. At `2025-02-16T23:28:16.2709247Z`, the user "firstuser" on the device "dimi-win10-au" successfully established a connection to `127.0.0.1` (localhost) using port `9150`, which is commonly used for Tor’s SOCKS proxy. The connection was initiated by `firefox.exe`, located in `C:\Users\firstuser\Desktop\Tor Browser\Browser\firefox.exe`, indicating that the Tor Browser was actively running and routing traffic through the Tor network. There were a few other connections to sites over port `443`.
 
 **Query used to locate events:**
 
 ```kql
-DeviceNetworkEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName != "system"  
-| where InitiatingProcessFileName in ("tor.exe", "firefox.exe")  
-| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150", "80", "443")  
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath  
-| order by Timestamp desc
+DeviceNetworkEvents
+| where DeviceName == "dimi-win10-au"
+| where InitiatingProcessAccountName != "system"
+| where InitiatingProcessFileName in ( "tor.exe", "firefox.exe", "tor-browser.exe", "torbrowser.exe")
+| where RemotePort in ( "9001", "9030", "9050", "9051", "9150", "9151" , "80", "443")
+| project Timestamp, DeviceName, Account = InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, InitiatingProcessFileName, InitiatingProcessFolderPath
+| order by Timestamp desc 
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+<img width="757" alt="image" src="https://github.com/user-attachments/assets/84ee0cb0-2e0c-4a24-9251-95e8003a1e34" />
+
 
 ---
 
