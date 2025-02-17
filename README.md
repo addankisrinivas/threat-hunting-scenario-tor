@@ -104,12 +104,13 @@ DeviceNetworkEvents
 
 ## Chronological Event Timeline 
 
-### 1. File Download - TOR Installer
+### 1. Initial Download and File Creation
 
-- **Timestamp:** `2024-11-08T22:14:48.6065231Z`
-- **Event:** The user "employee" downloaded a file named `tor-browser-windows-x86_64-portable-14.0.1.exe` to the Downloads folder.
-- **Action:** File download detected.
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
+- **Timestamp:** `2025-02-16T23:23:54.7864951Z`
+- **Event:** FileRenamed
+- **Details:** The file tor-browser-windows-x86_64-portable-14.0.6.exe was renamed in the Downloads folder. This indicates the user "firstuser" downloaded the Tor Browser installer.
+- **File Path:** `C:\Users\firstuser\Downloads\tor-browser-windows-x86_64-portable-14.0.6.exe`
+- **SHA256:** `8396d2cd3859189ac38629ac7d71128f6596b5cc71e089ce490f86f14b4ffb94`
 
 ### 2. Process Execution - TOR Browser Installation
 
