@@ -112,20 +112,26 @@ DeviceNetworkEvents
 - **File Path:** `C:\Users\firstuser\Downloads\tor-browser-windows-x86_64-portable-14.0.6.exe`
 - **SHA256:** `8396d2cd3859189ac38629ac7d71128f6596b5cc71e089ce490f86f14b4ffb94`
 
-### 2. Process Execution - TOR Browser Installation
+### 2. Silent Execution of Tor Browser Installer
 
-- **Timestamp:** `2024-11-08T22:16:47.4484567Z`
-- **Event:** The user "employee" executed the file `tor-browser-windows-x86_64-portable-14.0.1.exe` in silent mode, initiating a background installation of the TOR Browser.
-- **Action:** Process creation detected.
-- **Command:** `tor-browser-windows-x86_64-portable-14.0.1.exe /S`
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
+- **Timestamp:** `2025-02-16T23:27:07.0628924Z`
+- **Event:** ProcessCreated
+- **Details:** The Tor Browser portable installer `(tor-browser-windows-x86_64-portable-14.0.6.exe)` was silently executed with the /S flag, indicating an unattended installation
+- **Command Line:** `tor-browser-windows-x86_64-portable-14.0.6.exe /S`
+- **File Path:** `C:\Users\firstuser\Downloads\tor-browser-windows-x86_64-portable-14.0.6.exe`
+- **SHA256:** `8396d2cd3859189ac38629ac7d71128f6596b5cc71e089ce490f86f14b4ffb94`
 
-### 3. Process Execution - TOR Browser Launch
+### 3. Tor Browser Files Created on Desktop
 
-- **Timestamp:** `2024-11-08T22:17:21.6357935Z`
-- **Event:** User "employee" opened the TOR browser. Subsequent processes associated with TOR browser, such as `firefox.exe` and `tor.exe`, were also created, indicating that the browser launched successfully.
-- **Action:** Process creation of TOR browser-related executables detected.
-- **File Path:** `C:\Users\employee\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
+- **Timestamp:** `2025-02-16T23:27:25.7716741Z`
+- **Event:** FileCreated
+- **Details:** Multiple Tor-related files were created on the desktop, including tor.exe, Tor.txt, Torbutton.txt, and Tor-Launcher.txt.
+- **File Path:**
+-               o `C:\Users\employee\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
+-               o	`C:\Users\firstuser\Desktop\Tor Browser\Browser\TorBrowser\Docs\Licenses\Tor.txt`
+-               o	`C:\Users\firstuser\Desktop\Tor Browser\Browser\TorBrowser\Docs\Licenses\Torbutton.txt`
+-               o	`C:\Users\firstuser\Desktop\Tor Browser\Browser\TorBrowser\Docs\Licenses\Tor-Launcher.txt`
+
 
 ### 4. Network Connection - TOR Network
 
